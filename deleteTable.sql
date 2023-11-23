@@ -1,3 +1,4 @@
+begin;
 -- remove table by order
 DELETE FROM ClienteReserva;
 DELETE FROM Reserva;
@@ -8,3 +9,4 @@ DELETE FROM Dispositivo;
 DELETE FROM TelefoneLoja; 
 DELETE FROM Loja;
 DELETE FROM Pessoa;
+commit;
