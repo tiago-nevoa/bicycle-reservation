@@ -4,8 +4,8 @@ INSERT INTO Pessoa (id, nome, morada, email, telefone, noident, nacionalidade, a
     (1, 'Peter Pan', 'Terra do Nunca', 'peter@gmail.com', '919821731', '15223370', 'Inglês','C'),
     (2, 'Mulan', 'Rua do Sol-posto', 'mulan@gmail.com', '919821732', '15223371', 'Chinesa', 'G'),
     (3, 'Pocahontas', 'Floresta Encantada', 'pocahontas@gmail.com', '919821733', '15223372', 'Nativa Americana', 'C'),
-    (4, 'Hércules', 'Praça Central de Atenas','hercules@gmail.com', '919821734', '15223373', 'Grego', 'G'),
-	(5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Português', 'G'),
+    (4, 'Hércules', 'Praça Central de Atenas','hercules@gmail.com', '919821734', '15223373', 'Grego', 'C'),
+	(5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Português', 'C'),
 	(6, 'Alice', 'País das Maravilhas','alice@gmail.com', '919821736', '15223375', 'Alemã', 'C');
 
 
@@ -55,6 +55,12 @@ INSERT INTO Bicicleta (id, peso, raio, modelo, marca, mudanca, estado, atrdisc, 
 	),
 	(	6, 73.01,  14, 'Dutch Treasure', 'Trek', 1, 'livre', 'C', 
 		(SELECT noserie FROM Dispositivo WHERE noserie = 779)
+	),
+	(	7, 78.01,  14, 'Black Pearl', 'Trek', 6, 'em manutenção', 'C', 
+		(SELECT noserie FROM Dispositivo WHERE noserie = 778)
+	),
+	(	8, 78.20,  15, 'Pegasus', 'Trek', 18, 'em manutenção', 'C', 
+		(SELECT noserie FROM Dispositivo WHERE noserie = 777)
 	);
 
 INSERT INTO Classica (bicicleta, nomudanca) VALUES
@@ -196,7 +202,7 @@ INSERT INTO ClienteReserva (cliente, reserva, loja) VALUES
 		456
 	),
 	(
-		(SELECT id FROM Pessoa WHERE noident = '15223371'),
+		(SELECT id FROM Pessoa WHERE noident = '15223370'),
 		9,
 		456
 	),

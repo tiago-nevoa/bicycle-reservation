@@ -1,7 +1,7 @@
 begin;
 -- remove views
-DROP VIEW IF EXISTS public.ListaJoaoFilipe;
-DROP VIEW IF EXISTS public.BicicletaSemNumeros;
+DROP VIEW IF EXISTS public.LISTAJOAOFILIPE;
+DROP VIEW IF EXISTS public.BICICLETASEMNUMEROS;
 
 -- remove table by order
 DROP TABLE IF EXISTS ClienteReserva;
