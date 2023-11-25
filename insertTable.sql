@@ -184,7 +184,7 @@ INSERT INTO ClienteReserva (cliente, reserva, loja) VALUES
 		456
 	),
 	(
-		(SELECT id FROM Pessoa WHERE noident = '15223373'),
+		(SELECT id FROM Pessoa WHERE noident = '15223376'),
 		4,
 		456
 	),
@@ -214,7 +214,7 @@ INSERT INTO ClienteReserva (cliente, reserva, loja) VALUES
 		456
 	),
 	(
-		(SELECT id FROM Pessoa WHERE noident = '15223373'),
+		(SELECT id FROM Pessoa WHERE noident = '15223376'),
 		10,
 		456
 	)
