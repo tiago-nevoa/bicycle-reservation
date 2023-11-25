@@ -27,11 +27,6 @@ NATURAL JOIN
 nenhuma reserva.
 */
 
-SELECT DISTINCT nome, morada, telefone FROM Pessoa
-LEFT JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
-WHERE ClienteReserva.cliente IS NULL;
-
-
 -- R10 operation
 SELECT nome, morada, telefone
 FROM
@@ -58,6 +53,12 @@ FROM
     WHERE cliente = id
 ) AS R9;
 
+
+-- Outra opção---
+SELECT DISTINCT nome, morada, telefone FROM Pessoa
+LEFT JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
+WHERE ClienteReserva.cliente IS NULL;
+
 /*
 (d) Apresente a lista de bicicletas (marca, modelo e estado) que não estão associadas
 a nenhuma reserva e não são eléctricas.
@@ -73,41 +74,59 @@ WHERE Reserva.bicicleta IS NULL AND atrdisc = 'C';
 estado encontra-se em “em manutenção”.
 */
 
+
+SELECT noserie, latitude, longitude
+FROM (
+    SELECT dispositivo
+    FROM Bicicleta
+    WHERE estado = 'em manutenção'
+) AS R16
+JOIN Dispositivo ON R16.dispositivo = Dispositivo.noserie;
+
+
+-- Outra opção---
 SELECT noserie, latitude, longitude FROM Dispositivo
 JOIN Bicicleta ON Dispositivo.noserie = Bicicleta.dispositivo
 WHERE estado = 'em manutenção';
 
 /*
-(f) O nome dos clientes que realizaram reservas com bicicletas eléctricas. Apresente in-
-formação sobre os clientes e o número de reservas.
+(f) O nome dos clientes que realizaram reservas com bicicletas eléctricas. Apresente informação sobre os clientes e o número de reservas.
+*/
+
+SELECT nome, COUNT(*) AS numreservas FROM Pessoa
+JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
+JOIN Reserva ON ClienteReserva.reserva = Reserva.noreserva
+JOIN Bicicleta ON Reserva.bicicleta = Bicicleta.id
+WHERE Bicicleta.atrdisc = 'E'
+GROUP BY nome
+
+/*
+(g) Pretende-se obter a lista de clientes que efectuaram reservas com um valor total superior a 100 (e.g.).
 */
 
 /*
-(g) Pretende-se obter a lista de clientes que efectuaram reservas com um valor total superior
-a e 100 (e.g.).
+(h) Liste informações (email, endereço e localidade) sobre lojas e respectivos números de telefone associados, incluindo lojas que podem não ter um número de telefone associado.
+*/
+
+SELECT email, endereco, localidade, TelefoneLoja.numero FROM Loja
+LEFT JOIN TelefoneLoja ON Loja.codigo = TelefoneLoja.loja
+
+/*
+(i) Para o cliente de nome “José Manuel”, pretende-se a lista de reservas (noreserva e loja) que efectuou, nomeadamente a sua data e as horas de inı́cio e de fim, e o preço final desta.
 */
 
 /*
-(h) Liste informações (email, endereço e localidade) sobre lojas e respectivos números
-de telefone associados, incluindo lojas que podem não ter um número de telefone asso-
-ciado.
-*/
-
-/*
-(i) Para o cliente de nome “José Manuel”, pretende-se a lista de reservas (noreserva e
-loja) que efectuou, nomeadamente a sua data e as horas de inı́cio e de fim, e o preço
-final desta.
-*/
-
-/*
-(j) Apresente a lista do(s) cliente(s) (nome, morada, telefone e nacionalidade),
-com mais reservas no ano de 2023 1 .
+(j) Apresente a lista do(s) cliente(s) (nome, morada, telefone e nacionalidade), com mais reservas no ano de 2023 1 .
 */
 
 /*
 (k) Apresente o número de clientes de nacionalidade portuguesa e outros. O resultado deve
 mostrar os atributos nacionalidade e o número de clientes.
 */
+
+SELECT DISTINCT nacionalidade, COUNT(*) FROM Pessoa
+WHERE NOT atrdisc = 'G' 
+GROUP BY nacionalidade
 
 
 /*
