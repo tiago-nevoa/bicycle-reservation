@@ -20,8 +20,9 @@ CREATE TABLE Loja(
 );
 
 CREATE TABLE TelefoneLoja(
-	loja integer UNIQUE REFERENCES Loja(codigo),
-	numero varchar(10) PRIMARY KEY CHECK (numero ~ '^\d{4,15}$')
+	loja integer REFERENCES Loja(codigo),
+	numero varchar(10) CHECK (numero ~ '^\d{4,15}$'),
+	PRIMARY KEY(loja, numero)
 );
 
 

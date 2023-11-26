@@ -95,6 +95,11 @@ GROUP BY nome;
 /*
 (g) Pretende-se obter a lista de clientes que efectuaram reservas com um valor total superior a 100 (e.g.).
 */
+SELECT nome, noident, SUM(valor) as total from Pessoa
+JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
+JOIN Reserva ON ClienteReserva.reserva = Reserva.noreserva
+GROUP BY nome, noident
+HAVING SUM(valor) > 100;
 
 /*
 (h) Liste informações (email, endereço e localidade) sobre lojas e respectivos números de telefone associados, incluindo lojas que podem não ter um número de telefone associado.
