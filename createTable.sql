@@ -39,10 +39,11 @@ CREATE TABLE Bicicleta(
 	raio integer NOT NULL CHECK (raio BETWEEN 13 AND 23),
 	modelo varchar(20) NOT NULL,
 	marca varchar(30) NOT NULL,
-	mudanca integer CHECK (mudanca IN(1, 6, 18, 24)),
+	mudanca integer,
 	estado varchar(30) NOT NULL CHECK (estado IN('livre', 'ocupado', 'em manutenção')),
 	atrdisc char(2) NOT NULL CHECK (atrdisc IN('C', 'E')),
-	dispositivo integer NOT NULL REFERENCES Dispositivo(noserie)
+	dispositivo integer NOT NULL REFERENCES Dispositivo(noserie),
+	constraint mudanca_check CHECK (mudanca IN(1, 6, 18, 24))
 );
 
 CREATE TABLE Classica(
