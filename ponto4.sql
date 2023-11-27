@@ -8,8 +8,8 @@ BEGIN;
 a) alterar o atributo mudanca em BICICLETA adicionando um novo valor, neste caso 40.
 */
 
-ALTER TABLE Bicicleta DROP CONSTRAINT IF EXISTS bicicleta_mudanca_check;
-ALTER TABLE Bicicleta ADD CONSTRAINT bicicleta_mudanca_check CHECK (mudanca IN (1, 6, 18, 24, 40)); 
+ALTER TABLE Bicicleta DROP CONSTRAINT IF EXISTS CHK_Bicicleta_mudanca;
+ALTER TABLE Bicicleta ADD CONSTRAINT CHK_Bicicleta_mudanca CHECK (mudanca IN (1, 6, 18, 24, 40)); 
 
 /*
 b) afectar este novo valor à(s) bicicleta(s) já registada(s) na BD com o modelo “Modelo-B” da marca “Marca-A”.
