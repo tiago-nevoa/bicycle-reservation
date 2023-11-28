@@ -5,10 +5,10 @@ INSERT INTO Pessoa (id, nome, morada, email, telefone, noident, nacionalidade, a
     (2, 'Mulan', 'Rua do Sol-posto', 'mulan@gmail.com', '919821732', '15223371', 'Chinesa', 'G'),
     (3, 'Pocahontas', 'Floresta Encantada', 'pocahontas@gmail.com', '919821733', '15223372', 'Nativa Americana', 'C'),
     (4, 'Hércules', 'Praça Central de Atenas','hercules@gmail.com', '919821734', '15223373', 'Grega', 'C'),
-	(5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Portuguesa', 'C'),
-	(6, 'Alice', 'País das Maravilhas','alice@gmail.com', '919821736', '15223375', 'Alemã', 'C'),
-	(7, 'José Manuel', 'Avenida de Roma','zemanel@gmail.com', '919821737', '15223376', 'Portuguesa', 'C'),
-	(8, 'Christopher Robin', 'Bosque dos Cem Acres','christopher@gmail.com', '919821738', '15223377', 'Inglesa', 'G');
+	  (5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Portuguesa', 'C'),
+	  (6, 'Alice', 'País das Maravilhas','alice@gmail.com', '919821736', '15223375', 'Alemã', 'C'),
+	  (7, 'José Manuel', 'Avenida de Roma','zemanel@gmail.com', '919821737', '15223376', 'Portuguesa', 'C'),
+	  (8, 'Christopher Robin', 'Bosque dos Cem Acres','christopher@gmail.com', '919821738', '15223377', 'Inglesa', 'G');
 
 
 INSERT INTO Loja (codigo, email, endereco, localidade, gestor) VALUES
