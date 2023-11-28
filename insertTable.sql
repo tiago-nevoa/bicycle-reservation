@@ -71,14 +71,16 @@ INSERT INTO Bicicleta (id, peso, raio, modelo, marca, mudanca, estado, atrdisc, 
 	),
 	(	9, 65.56,  17, 'Modelo-B', 'Marca-A', 24, 'livre', 'C', 
 		(SELECT noserie FROM Dispositivo WHERE noserie = 779)
-	);
+	 )
+	;
 
 INSERT INTO Classica (bicicleta, nomudanca) VALUES
 	((SELECT id FROM Bicicleta WHERE modelo = 'Mountain 3000'), 5),
 	((SELECT id FROM Bicicleta WHERE modelo = 'Speedy Kids'), 3),
 	((SELECT id FROM Bicicleta WHERE modelo = 'Dutch Treasure'), 2),
   	((SELECT id FROM Bicicleta WHERE modelo = 'Black Pearl'), 4),
-  	((SELECT id FROM Bicicleta WHERE modelo = 'Pegasus'), 5)
+  	((SELECT id FROM Bicicleta WHERE modelo = 'Pegasus'), 5),
+	((SELECT id FROM Bicicleta WHERE modelo = 'Modelo-B'), 4)
 ;
 
 INSERT INTO Eletrica (bicicleta, autonomia, velocidade) VALUES

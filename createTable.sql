@@ -35,7 +35,8 @@ CREATE TABLE Dispositivo(
 	noserie integer PRIMARY KEY,
 	latitude numeric(6,4) NOT NULL,
 	longitude numeric(6,4) NOT NULL,
-	bateria integer NOT NULL CHECK (bateria BETWEEN 0 AND 100)
+	bateria integer NOT NULL,
+	constraint CHK_Dispositivo_bateria CHECK (bateria BETWEEN 0 AND 100)
 );
 
 CREATE TABLE Bicicleta(

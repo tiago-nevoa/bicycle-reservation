@@ -15,6 +15,6 @@ ALTER TABLE Bicicleta ADD CONSTRAINT CHK_Bicicleta_mudanca CHECK (mudanca IN (1,
 b) afectar este novo valor à(s) bicicleta(s) já registada(s) na BD com o modelo “Modelo-B” da marca “Marca-A”.
 */
 
-UPDATE Bicicleta SET mudanca = 40 WHERE modelo = 'Mountain Roll 4000' and marca = 'Trek';
+UPDATE Bicicleta SET mudanca = 40 WHERE modelo = 'Modelo-B' and marca = 'Marca-A';
 
 COMMIT;
