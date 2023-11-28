@@ -5,10 +5,10 @@ INSERT INTO Pessoa (id, nome, morada, email, telefone, noident, nacionalidade, a
     (2, 'Mulan', 'Rua do Sol-posto', 'mulan@gmail.com', '919821732', '15223371', 'Chinesa', 'G'),
     (3, 'Pocahontas', 'Floresta Encantada', 'pocahontas@gmail.com', '919821733', '15223372', 'Nativa Americana', 'C'),
     (4, 'Hércules', 'Praça Central de Atenas','hercules@gmail.com', '919821734', '15223373', 'Grega', 'C'),
-	  (5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Portuguesa', 'C'),
-	  (6, 'Alice', 'País das Maravilhas','alice@gmail.com', '919821736', '15223375', 'Alemã', 'C'),
-	  (7, 'José Manuel', 'Avenida de Roma','zemanel@gmail.com', '919821737', '15223376', 'Portuguesa', 'C'),
-	  (8, 'Christopher Robin', 'Bosque dos Cem Acres','christopher@gmail.com', '919821738', '15223377', 'Inglesa', 'G');
+	(5, 'João Filipe', 'Avenida da República','joaofilipe@gmail.com', '919821735', '15223374', 'Portuguesa', 'C'),
+	(6, 'Alice', 'País das Maravilhas','alice@gmail.com', '919821736', '15223375', 'Alemã', 'C'),
+	(7, 'José Manuel', 'Avenida de Roma','zemanel@gmail.com', '919821737', '15223376', 'Portuguesa', 'C'),
+	(8, 'Christopher Robin', 'Bosque dos Cem Acres','christopher@gmail.com', '919821738', '15223377', 'Inglesa', 'G');
 
 
 INSERT INTO Loja (codigo, email, endereco, localidade, gestor) VALUES
@@ -68,14 +68,19 @@ INSERT INTO Bicicleta (id, peso, raio, modelo, marca, mudanca, estado, atrdisc, 
 	),
 	(	8, 78.20,  15, 'Pegasus', 'Trek', 18, 'em manutenção', 'C', 
 		(SELECT noserie FROM Dispositivo WHERE noserie = 777)
-	);
+	),
+	(	9, 65.56,  17, 'Modelo-B', 'Marca-A', 24, 'livre', 'C', 
+		(SELECT noserie FROM Dispositivo WHERE noserie = 779)
+	 )
+	;
 
 INSERT INTO Classica (bicicleta, nomudanca) VALUES
 	((SELECT id FROM Bicicleta WHERE modelo = 'Mountain 3000'), 5),
 	((SELECT id FROM Bicicleta WHERE modelo = 'Speedy Kids'), 3),
 	((SELECT id FROM Bicicleta WHERE modelo = 'Dutch Treasure'), 2),
   	((SELECT id FROM Bicicleta WHERE modelo = 'Black Pearl'), 4),
-  	((SELECT id FROM Bicicleta WHERE modelo = 'Pegasus'), 5)
+  	((SELECT id FROM Bicicleta WHERE modelo = 'Pegasus'), 5),
+	((SELECT id FROM Bicicleta WHERE modelo = 'Modelo-B'), 4)
 ;
 
 INSERT INTO Eletrica (bicicleta, autonomia, velocidade) VALUES

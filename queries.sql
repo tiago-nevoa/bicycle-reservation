@@ -21,34 +21,7 @@ NATURAL JOIN
 (c) Pretende-se saber que pessoas (nome, morada e telefone) não estão associadas a nenhuma reserva.
 */
 
--- R10 operation
-SELECT nome, morada, telefone
-FROM
-(
-    -- R9 operation
-    SELECT *
-    FROM
-    (
-        -- R8 operation
-        SELECT * 
-        FROM
-        (
-            -- R7 operation
-            SELECT id AS cliente
-            FROM Pessoa
-            WHERE id NOT IN (
-                -- R4 operation
-                SELECT cliente
-                FROM ClienteReserva
-             )
-        ) AS R7
-        CROSS JOIN Pessoa 
-    ) AS R8
-    WHERE cliente = id
-) AS R9;
 
-
--- Outra opção---
 SELECT DISTINCT nome, morada, telefone FROM Pessoa
 LEFT JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
 WHERE ClienteReserva.cliente IS NULL;
@@ -57,8 +30,8 @@ WHERE ClienteReserva.cliente IS NULL;
 (d) Apresente a lista de bicicletas (marca, modelo e estado) que não estão associadas a nenhuma reserva e não são eléctricas.
 */
 
-SELECT marca, modelo, estado FROM Bicicleta
-LEFT JOIN Reserva ON Bicicleta.id = Reserva.bicicleta
+SELECT marca, modelo, estado FROM Reserva
+RIGHT JOIN Bicicleta ON Reserva.bicicleta = Bicicleta.id
 WHERE Reserva.bicicleta IS NULL AND atrdisc = 'C';
 
 
@@ -67,17 +40,17 @@ WHERE Reserva.bicicleta IS NULL AND atrdisc = 'C';
 */
 
 
-SELECT noserie, latitude, longitude
+SELECT DISTINCT noserie, latitude, longitude
 FROM (
     SELECT dispositivo
     FROM Bicicleta
     WHERE estado = 'em manutenção'
-) AS R16
-JOIN Dispositivo ON R16.dispositivo = Dispositivo.noserie;
+) AS R1
+JOIN Dispositivo ON R1.dispositivo = Dispositivo.noserie;
 
 
 -- Outra opção---
-SELECT noserie, latitude, longitude FROM Dispositivo
+SELECT DISTINCT noserie, latitude, longitude FROM Dispositivo
 JOIN Bicicleta ON Dispositivo.noserie = Bicicleta.dispositivo
 WHERE estado = 'em manutenção';
 
@@ -85,7 +58,7 @@ WHERE estado = 'em manutenção';
 (f) O nome dos clientes que realizaram reservas com bicicletas eléctricas. Apresente informação sobre os clientes e o número de reservas.
 */
 
-SELECT nome, COUNT(*) AS numreservas FROM Pessoa
+SELECT nome, COUNT(*) FROM Pessoa
 JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
 JOIN Reserva ON ClienteReserva.reserva = Reserva.noreserva
 JOIN Bicicleta ON Reserva.bicicleta = Bicicleta.id
@@ -105,7 +78,7 @@ HAVING SUM(valor) > 100;
 (h) Liste informações (email, endereço e localidade) sobre lojas e respectivos números de telefone associados, incluindo lojas que podem não ter um número de telefone associado.
 */
 
-SELECT email, endereco, localidade, TelefoneLoja.numero FROM Loja
+SELECT email, endereco, localidade, numero FROM Loja
 LEFT JOIN TelefoneLoja ON Loja.codigo = TelefoneLoja.loja;
 
 /*
@@ -124,8 +97,15 @@ WHERE nome LIKE 'José Manuel';
 SELECT DISTINCT nome, morada, telefone, nacionalidade, COUNT(*) AS numreservas FROM Pessoa
 JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
 JOIN Reserva ON ClienteReserva.reserva = Reserva.noreserva
-WHERE EXTRACT(YEAR FROM Reserva.dtinicio) = EXTRACT(YEAR FROM CURRENT_TIMESTAMP)
-GROUP BY nome, morada, telefone, nacionalidade;
+WHERE EXTRACT(YEAR FROM Reserva.dtinicio) = 2023
+GROUP BY nome, morada, telefone, nacionalidade
+HAVING COUNT(*) = (SELECT MAX(numreservas) FROM (
+                            SELECT DISTINCT nome, morada, telefone, nacionalidade, COUNT(*) AS numreservas FROM Pessoa
+							JOIN ClienteReserva ON Pessoa.id = ClienteReserva.cliente
+							JOIN Reserva ON ClienteReserva.reserva = Reserva.noreserva
+							WHERE EXTRACT(YEAR FROM Reserva.dtinicio) = 2023
+							GROUP BY nome, morada, telefone, nacionalidade
+							) AS maximum);
 
 /*
 (k) Apresente o número de clientes de nacionalidade portuguesa e outros. O resultado deve mostrar os atributos nacionalidade e o número de clientes.
