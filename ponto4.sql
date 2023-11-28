@@ -1,4 +1,4 @@
-BEGIN;
+begin;
 
 /*
 4. Apresente o(s) comando(s) que permite(m): Devem garantir atomicidade nas alterações).
@@ -17,4 +17,4 @@ b) afectar este novo valor à(s) bicicleta(s) já registada(s) na BD com o model
 
 UPDATE Bicicleta SET mudanca = 40 WHERE modelo = 'Modelo-B' and marca = 'Marca-A';
 
-COMMIT;
+commit;
